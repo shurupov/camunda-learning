@@ -1,0 +1,9 @@
+version: "3"
+services:
+
+  excamad-ui:
+    container_name: excamad-ui
+    image: kotovdenis/excamad
+    ports:
+      - 9090:8080
+
