@@ -6,6 +6,9 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
 
+/*
+* https://stackoverflow.com/questions/35184310/spring-boot-jersey-setup-cors
+* */
 public class CORSResponseFilter implements ContainerResponseFilter {
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext)
         throws IOException {
