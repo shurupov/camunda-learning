@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0">
+  <bpmn:process id="learning-1.0-010-parallel-gateway-faster-branch" name="Parallel Gateway Faster Branch Process" isExecutable="true">
+    <bpmn:startEvent id="start-event" name="Start Event">
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="start-event" targetRef="Gateway_11h97ih" />
+    <bpmn:sequenceFlow id="Flow_1n00dbo" name="Home" sourceRef="Gateway_11h97ih" targetRef="Activity_0fnm55w" />
+    <bpmn:serviceTask id="Activity_0fnm55w" name="Home Address Delivery" camunda:delegateExpression="${addressDeliveryDelegate}">
+      <bpmn:incoming>Flow_1n00dbo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1shxjwx</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1n3xypo">
+      <bpmn:incoming>Flow_0dhvj3k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1shxjwx" sourceRef="Activity_0fnm55w" targetRef="Event_19t4e3o" />
+    <bpmn:sequenceFlow id="Flow_0aari39" name="Send email" sourceRef="Gateway_11h97ih" targetRef="send-email" />
+    <bpmn:endEvent id="Event_1nth6yc">
+      <bpmn:incoming>Flow_0z3dikf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0z3dikf" sourceRef="send-email" targetRef="Event_1nth6yc" />
+    <bpmn:serviceTask id="send-email" name="Send Email" camunda:delegateExpression="${sendEmailDelegate}">
+      <bpmn:incoming>Flow_0aari39</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z3dikf</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:parallelGateway id="Gateway_11h97ih">
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n00dbo</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0aari39</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0dhvj3k" sourceRef="Event_19t4e3o" targetRef="Event_1n3xypo" />
+    <bpmn:intermediateCatchEvent id="Event_19t4e3o" name="15 Seconds">
+      <bpmn:incoming>Flow_1shxjwx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0dhvj3k</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0pcvqq5">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="learning-1.0-010-parallel-gateway-faster-branch">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start-event">
+        <dc:Bounds x="162" y="209" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="153" y="252" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0owwd13_di" bpmnElement="Activity_0fnm55w">
+        <dc:Bounds x="510" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1cms8ut_di" bpmnElement="send-email">
+        <dc:Bounds x="510" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0yedhmv_di" bpmnElement="Gateway_11h97ih">
+        <dc:Bounds x="355" y="202" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1n3xypo_di" bpmnElement="Event_1n3xypo">
+        <dc:Bounds x="762" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nth6yc_di" bpmnElement="Event_1nth6yc">
+        <dc:Bounds x="762" y="312" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_160ne5d_di" bpmnElement="Event_19t4e3o">
+        <dc:Bounds x="672" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="661" y="145" width="59" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="198" y="227" />
+        <di:waypoint x="355" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n00dbo_di" bpmnElement="Flow_1n00dbo">
+        <di:waypoint x="380" y="202" />
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="510" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="399" y="103" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1shxjwx_di" bpmnElement="Flow_1shxjwx">
+        <di:waypoint x="610" y="120" />
+        <di:waypoint x="672" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0aari39_di" bpmnElement="Flow_0aari39">
+        <di:waypoint x="380" y="252" />
+        <di:waypoint x="380" y="330" />
+        <di:waypoint x="510" y="330" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="387" y="316" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z3dikf_di" bpmnElement="Flow_0z3dikf">
+        <di:waypoint x="610" y="330" />
+        <di:waypoint x="762" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dhvj3k_di" bpmnElement="Flow_0dhvj3k">
+        <di:waypoint x="708" y="120" />
+        <di:waypoint x="762" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

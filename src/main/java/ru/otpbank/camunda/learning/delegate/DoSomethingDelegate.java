@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class HomeDeliveryDelegate implements JavaDelegate {
+public class DoSomethingDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        log.info("Home deliver performed");
+        log.info("Something is done");
     }
 }
