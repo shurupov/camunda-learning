@@ -1,4 +1,4 @@
-package ru.otpbank.camunda.learning;
+package ru.otpbank.camunda.learning.service;
 
 import org.springframework.stereotype.Service;
 
