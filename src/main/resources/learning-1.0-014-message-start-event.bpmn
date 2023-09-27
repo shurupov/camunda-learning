@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_11dzs83" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:message id="Message_0bl5q94" name="SOME_MESSAGE" />
+  <bpmn:process id="learning-1.0-014-message-start-event" name="Message Start Event" isExecutable="true">
+    <bpmn:serviceTask id="Activity_05k1d8u" name="Do Something" camunda:delegateExpression="${doSomethingDelegate}">
+      <bpmn:incoming>Flow_098yqux</bpmn:incoming>
+      <bpmn:outgoing>Flow_17hkhqn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_10nvf4d">
+      <bpmn:incoming>Flow_17hkhqn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_17hkhqn" sourceRef="Activity_05k1d8u" targetRef="Event_10nvf4d" />
+    <bpmn:startEvent id="Event_0tzohu7" name="SOME_MESSAGE">
+      <bpmn:outgoing>Flow_0vjrgdx</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1q9b64e" messageRef="Message_0bl5q94" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0vjrgdx" sourceRef="Event_0tzohu7" targetRef="Event_09arjhy" />
+    <bpmn:sequenceFlow id="Flow_098yqux" sourceRef="Event_09arjhy" targetRef="Activity_05k1d8u" />
+    <bpmn:intermediateCatchEvent id="Event_09arjhy">
+      <bpmn:incoming>Flow_0vjrgdx</bpmn:incoming>
+      <bpmn:outgoing>Flow_098yqux</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0dlb4jg">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="learning-1.0-014-message-start-event">
+      <bpmndi:BPMNShape id="Event_1hyun2x_di" bpmnElement="Event_0tzohu7">
+        <dc:Bounds x="152" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="128" y="155" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_10nvf4d_di" bpmnElement="Event_10nvf4d">
+        <dc:Bounds x="522" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u3kn5m_di" bpmnElement="Activity_05k1d8u">
+        <dc:Bounds x="360" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03yhm68_di" bpmnElement="Event_09arjhy">
+        <dc:Bounds x="252" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_17hkhqn_di" bpmnElement="Flow_17hkhqn">
+        <di:waypoint x="460" y="130" />
+        <di:waypoint x="522" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vjrgdx_di" bpmnElement="Flow_0vjrgdx">
+        <di:waypoint x="188" y="130" />
+        <di:waypoint x="252" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_098yqux_di" bpmnElement="Flow_098yqux">
+        <di:waypoint x="288" y="130" />
+        <di:waypoint x="360" y="130" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

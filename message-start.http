@@ -1,0 +1,14 @@
+### Send POST request with start message
+POST http://localhost:8080/engine-rest/message
+Content-Type: application/json
+
+{
+  "messageName": "SOME_MESSAGE",
+  "businessKey": "12345",
+  "processVariables": {
+    "some_variable": {
+      "value": "This is a value",
+      "type": "String"
+    }
+  }
+}

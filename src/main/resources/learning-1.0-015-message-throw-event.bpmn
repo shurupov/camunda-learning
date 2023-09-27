@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1d35uit" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.19.0">
+  <bpmn:process id="learning-1.0-015-message-throw-event" name="Message Throw Event (not ready yet)" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_138s3jb</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_138s3jb" sourceRef="StartEvent_1" targetRef="do-comething" />
+    <bpmn:sequenceFlow id="Flow_1whab8k" sourceRef="do-comething" targetRef="Event_145o404" />
+    <bpmn:intermediateThrowEvent id="Event_145o404" name="SOME_MESSAGE">
+      <bpmn:incoming>Flow_1whab8k</bpmn:incoming>
+      <bpmn:outgoing>Flow_13fi39y</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_086q3iw" messageRef="Message_151asap" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="Event_1japxjt">
+      <bpmn:incoming>Flow_13fi39y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_13fi39y" sourceRef="Event_145o404" targetRef="Event_1japxjt" />
+    <bpmn:serviceTask id="do-comething" name="Do Something" camunda:delegateExpression="${doSomethingDelegate}">
+      <bpmn:incoming>Flow_138s3jb</bpmn:incoming>
+      <bpmn:outgoing>Flow_1whab8k</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_151asap" name="SOME_MESSAGE" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="learning-1.0-015-message-throw-event">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1py1czd_di" bpmnElement="Event_145o404">
+        <dc:Bounds x="432" y="99" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="408" y="142" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1japxjt_di" bpmnElement="Event_1japxjt">
+        <dc:Bounds x="532" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0icigi3_di" bpmnElement="do-comething">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_138s3jb_di" bpmnElement="Flow_138s3jb">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1whab8k_di" bpmnElement="Flow_1whab8k">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="432" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13fi39y_di" bpmnElement="Flow_13fi39y">
+        <di:waypoint x="468" y="117" />
+        <di:waypoint x="532" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
