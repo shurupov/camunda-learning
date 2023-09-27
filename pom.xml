@@ -67,6 +67,12 @@
       <scope>runtime</scope>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!-- GraalVM JavaScript Engine -->
     <dependency>
       <groupId>org.graalvm.js</groupId>

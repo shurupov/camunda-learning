@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0fr9mxs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.11.0">
+  <bpmn:process id="learning-1.0-004-user-task" name="User Task Process" isExecutable="true">
+    <bpmn:startEvent id="start-event" name="Start Event">
+      <bpmn:outgoing>SequenceFlow_1fp17al</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1fp17al" sourceRef="start-event" targetRef="delivery-select-task" />
+    <bpmn:userTask id="delivery-select-task" name="Delivery Select Task">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="where" label="Where to deliver?" type="enum" defaultValue="Office">
+            <camunda:validation />
+            <camunda:value id="Office" name="Office" />
+            <camunda:value id="Address" name="My Address" />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1fp17al</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tt4ztl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="Gateway_11h97ih">
+      <bpmn:incoming>Flow_0tt4ztl</bpmn:incoming>
+      <bpmn:outgoing>Flow_1n00dbo</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0cv862h</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0tt4ztl" sourceRef="delivery-select-task" targetRef="Gateway_11h97ih" />
+    <bpmn:sequenceFlow id="Flow_1n00dbo" sourceRef="Gateway_11h97ih" targetRef="Activity_0fnm55w">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${where=='Home'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0cv862h" sourceRef="Gateway_11h97ih" targetRef="Activity_15tmq88">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${where=='Office'}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_0fnm55w" name="Home Delivery" camunda:delegateExpression="${HomeDeliveryDelegate}">
+      <bpmn:incoming>Flow_1n00dbo</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_15tmq88" name="Office Delivery" camunda:delegateExpression="${OfficeDeliveryPerformed}">
+      <bpmn:incoming>Flow_0cv862h</bpmn:incoming>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="learning-1.0-004-user-task">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start-event">
+        <dc:Bounds x="179" y="209" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="170" y="252" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_144xwdm_di" bpmnElement="delivery-select-task">
+        <dc:Bounds x="270" y="187" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_11h97ih_di" bpmnElement="Gateway_11h97ih" isMarkerVisible="true">
+        <dc:Bounds x="425" y="202" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0owwd13_di" bpmnElement="Activity_0fnm55w">
+        <dc:Bounds x="530" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1aiftaa_di" bpmnElement="Activity_15tmq88">
+        <dc:Bounds x="530" y="300" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
+        <di:waypoint x="215" y="227" />
+        <di:waypoint x="270" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tt4ztl_di" bpmnElement="Flow_0tt4ztl">
+        <di:waypoint x="370" y="227" />
+        <di:waypoint x="425" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1n00dbo_di" bpmnElement="Flow_1n00dbo">
+        <di:waypoint x="450" y="202" />
+        <di:waypoint x="450" y="120" />
+        <di:waypoint x="530" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cv862h_di" bpmnElement="Flow_0cv862h">
+        <di:waypoint x="450" y="252" />
+        <di:waypoint x="450" y="340" />
+        <di:waypoint x="530" y="340" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
