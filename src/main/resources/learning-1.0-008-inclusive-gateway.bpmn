@@ -8,7 +8,7 @@
     <bpmn:userTask id="delivery-select-task" name="Delivery Select Task">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="where" label="Where to deliver?" type="enum" defaultValue="PostOffice">
+          <camunda:formField id="where" label="Where to deliver?" type="enum" defaultValue="Office">
             <camunda:validation />
             <camunda:value id="Office" name="Office" />
             <camunda:value id="Address" name="My Address" />
@@ -49,12 +49,11 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${where=='PostOffice'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:inclusiveGateway id="Gateway_11h97ih">
-      <bpmn:incoming>Flow_0fec4md</bpmn:incoming>
+      <bpmn:incoming>Flow_15e5hh3</bpmn:incoming>
       <bpmn:outgoing>Flow_1n00dbo</bpmn:outgoing>
       <bpmn:outgoing>Flow_0aari39</bpmn:outgoing>
       <bpmn:outgoing>Flow_0kdv4es</bpmn:outgoing>
     </bpmn:inclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_0fec4md" sourceRef="whether-send-email-task" targetRef="Gateway_11h97ih" />
     <bpmn:userTask id="whether-send-email-task" name="Whether Send Email Select Task">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -62,12 +61,13 @@
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_0tt4ztl</bpmn:incoming>
-      <bpmn:outgoing>Flow_0fec4md</bpmn:outgoing>
+      <bpmn:outgoing>Flow_15e5hh3</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:serviceTask id="send-email" name="Send Email" camunda:delegateExpression="${sendEmailDelegate}">
       <bpmn:incoming>Flow_0aari39</bpmn:incoming>
       <bpmn:outgoing>Flow_0z3dikf</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_15e5hh3" sourceRef="whether-send-email-task" targetRef="Gateway_11h97ih" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="learning-1.0-008-inclisive-gateway">
@@ -85,24 +85,24 @@
         <dc:Bounds x="830" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1n3xypo_di" bpmnElement="Event_1n3xypo">
-        <dc:Bounds x="1122" y="102" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_09y18nn_di" bpmnElement="Gateway_11h97ih">
-        <dc:Bounds x="615" y="202" width="50" height="50" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0julf86_di" bpmnElement="whether-send-email-task">
-        <dc:Bounds x="430" y="187" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1aiftaa_di" bpmnElement="Activity_15tmq88">
         <dc:Bounds x="830" y="187" width="100" height="80" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1n3xypo_di" bpmnElement="Event_1n3xypo">
+        <dc:Bounds x="1122" y="102" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0blx4p5_di" bpmnElement="Event_0blx4p5">
         <dc:Bounds x="1122" y="209" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1nth6yc_di" bpmnElement="Event_1nth6yc">
         <dc:Bounds x="1122" y="312" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_09y18nn_di" bpmnElement="Gateway_11h97ih">
+        <dc:Bounds x="615" y="202" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0julf86_di" bpmnElement="whether-send-email-task">
+        <dc:Bounds x="430" y="187" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1cms8ut_di" bpmnElement="send-email">
         <dc:Bounds x="830" y="290" width="100" height="80" />
@@ -150,7 +150,7 @@
           <dc:Bounds x="654" y="209" width="72" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0fec4md_di" bpmnElement="Flow_0fec4md">
+      <bpmndi:BPMNEdge id="Flow_15e5hh3_di" bpmnElement="Flow_15e5hh3">
         <di:waypoint x="530" y="227" />
         <di:waypoint x="615" y="227" />
       </bpmndi:BPMNEdge>
